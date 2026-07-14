@@ -1,16 +1,20 @@
 :root {
-  --bg: #11141a;
-  --surface: #1a1f28;
-  --surface-2: #212836;
-  --border: #2a3242;
-  --text: #eef1f6;
-  --text-dim: #8b95a7;
-  --accent: #f2a341;
-  --accent-dim: #4a3a22;
-  --good: #4ade80;
-  --bad: #f87171;
-  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-2: #f5f5f7;
+  --surface-3: #ececee;
+  --border: #e2e2e6;
+  --text: #1d1d1f;
+  --text-dim: #6e6e73;
+  --accent: #0071e3;
+  --accent-tint: #eaf3fe;
+  --good: #1e8e3e;
+  --good-tint: #e7f7ec;
+  --bad: #d70015;
+  --bad-tint: #fdeceb;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 1px rgba(0,0,0,0.03);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,6 +32,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
 }
 
 button {
@@ -36,45 +41,51 @@ button {
 }
 
 .header {
-  padding: 20px 16px 14px;
+  padding: 22px 16px 16px;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
 
 .header-title {
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.1em;
   color: var(--accent);
   font-weight: 600;
   text-transform: uppercase;
 }
 
 .header-sub {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   margin-top: 4px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 .nav {
   display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
 }
 
 .nav-btn {
   flex: 1;
-  padding: 13px 0;
-  background: none;
+  padding: 8px 0;
+  background: transparent;
   border: none;
+  border-radius: 8px;
   color: var(--text-dim);
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.03em;
-  border-bottom: 2px solid transparent;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, color 0.15s;
 }
 
 .nav-btn.active {
-  color: var(--text);
-  border-bottom-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
 }
 
 .content {
@@ -86,18 +97,19 @@ button {
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 18px;
   margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
 }
 
 .label {
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   color: var(--text-dim);
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .rep-row {
@@ -110,17 +122,18 @@ button {
   padding: 12px 0;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--text-dim);
   font-size: 15px;
   font-weight: 600;
   font-family: var(--mono);
+  transition: all 0.15s;
 }
 
 .rep-btn.active {
-  background: var(--accent-dim);
+  background: var(--accent);
   border-color: var(--accent);
-  color: var(--accent);
+  color: #ffffff;
 }
 
 .outcome-grid {
@@ -132,7 +145,7 @@ button {
 .outcome-btn {
   width: 100%;
   padding: 16px 16px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 15px;
   font-weight: 500;
   text-align: left;
@@ -142,6 +155,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: background 0.15s;
 }
 
 .outcome-btn:active {
@@ -154,7 +168,7 @@ button {
 }
 
 .outcome-btn.meeting {
-  background: var(--accent-dim);
+  background: var(--accent-tint);
   border-color: var(--accent);
   color: var(--accent);
   font-weight: 600;
@@ -171,7 +185,7 @@ button {
   padding: 14px 0;
   background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   color: var(--text);
   font-size: 14px;
   font-weight: 600;
@@ -180,7 +194,7 @@ button {
 .brand-btn.sel {
   background: var(--accent);
   border-color: var(--accent);
-  color: #1a1206;
+  color: #ffffff;
 }
 
 .toast {
@@ -188,13 +202,12 @@ button {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--surface-2);
-  border: 1px solid var(--accent);
+  background: var(--text);
   border-radius: 10px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   font-size: 13px;
-  color: var(--accent);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
   animation: fadeUp 0.2s ease-out;
   z-index: 50;
 }
@@ -212,7 +225,7 @@ button {
 }
 
 .filter-btn {
-  padding: 7px 13px;
+  padding: 7px 14px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
@@ -225,14 +238,14 @@ button {
 .filter-btn.active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #1a1206;
+  color: #ffffff;
 }
 
 .funnel-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 12px 0;
+  padding: 13px 0;
   border-bottom: 1px solid var(--border);
 }
 
@@ -254,6 +267,7 @@ button {
   font-family: var(--mono);
   font-size: 16px;
   font-weight: 600;
+  color: var(--text);
 }
 
 .funnel-hint {
@@ -299,7 +313,7 @@ button {
   color: var(--text-dim);
   font-weight: 600;
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 8px 6px;
   border-bottom: 1px solid var(--border);
@@ -309,6 +323,7 @@ button {
   padding: 9px 6px;
   border-bottom: 1px solid var(--border);
   font-family: var(--mono);
+  color: var(--text);
 }
 
 .export-btn {
@@ -348,35 +363,37 @@ button {
 .modal-bg {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.35);
   z-index: 100;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  backdrop-filter: blur(2px);
 }
 
 .modal {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px 16px 0 0;
-  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  padding: 22px;
   width: 100%;
   max-width: 640px;
   max-height: 88vh;
   overflow-y: auto;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.12);
 }
 
 .modal h3 {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
   margin-bottom: 4px;
 }
 
 .modal-sub {
   font-size: 12px;
   color: var(--text-dim);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   line-height: 1.5;
 }
 
@@ -385,8 +402,8 @@ button {
 }
 
 .dm-field label {
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
   color: var(--text-dim);
   font-weight: 600;
   text-transform: uppercase;
@@ -398,23 +415,26 @@ button {
 .dm-field textarea,
 .dm-field select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 11px 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 13px;
   color: var(--text);
   background: var(--surface-2);
   font-family: var(--sans);
 }
 
+.dm-field input:focus,
+.dm-field textarea:focus,
+.dm-field select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  background: var(--surface);
+}
+
 .dm-field textarea {
   resize: vertical;
   min-height: 64px;
-}
-
-.dm-field select option {
-  background: var(--surface-2);
-  color: var(--text);
 }
 
 .o-pills {
@@ -436,7 +456,7 @@ button {
 .o-pill.sel {
   background: var(--accent);
   border-color: var(--accent);
-  color: #1a1206;
+  color: #ffffff;
 }
 
 .modal-actions {
@@ -447,22 +467,22 @@ button {
 
 .btn-save {
   flex: 1;
-  padding: 12px;
+  padding: 13px;
   background: var(--accent);
-  color: #1a1206;
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
 }
 
 .btn-skip {
   flex: 1;
-  padding: 12px;
+  padding: 13px;
   background: var(--surface-2);
   color: var(--text-dim);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
 }
@@ -487,7 +507,7 @@ button {
 
 .reason-bar-track {
   height: 6px;
-  background: var(--surface-2);
+  background: var(--surface-3);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -500,8 +520,8 @@ button {
 
 .convo-entry {
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 13px 14px;
   background: var(--surface-2);
   margin-bottom: 10px;
 }
@@ -516,19 +536,20 @@ button {
 .convo-company {
   font-size: 13px;
   font-weight: 600;
+  color: var(--text);
 }
 
 .badge {
   font-size: 10px;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 99px;
   font-weight: 600;
 }
 
-.badge-meeting { background: var(--accent); color: #1a1206; }
-.badge-followup { background: rgba(96,165,250,0.2); color: #93c5fd; }
-.badge-email { background: rgba(245,158,11,0.2); color: #fcd34d; }
-.badge-closed { background: rgba(255,255,255,0.08); color: var(--text-dim); }
+.badge-meeting { background: var(--accent-tint); color: var(--accent); }
+.badge-followup { background: #eef4fe; color: #3d7bd9; }
+.badge-email { background: #fef6e7; color: #b8790a; }
+.badge-closed { background: var(--surface-3); color: var(--text-dim); }
 
 .convo-row {
   display: flex;
