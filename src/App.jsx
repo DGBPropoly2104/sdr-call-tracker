@@ -2,6 +2,7 @@ import { useState } from 'react'
 import LogCall from './components/LogCall'
 import Dashboard from './components/Dashboard'
 import Reports from './components/Reports'
+import Insights from './components/Insights'
 import './index.css'
 
 export default function App() {
@@ -25,12 +26,16 @@ export default function App() {
         <button className={'nav-btn' + (tab === 'reports' ? ' active' : '')} onClick={() => setTab('reports')}>
           Reports
         </button>
+        <button className={'nav-btn' + (tab === 'insights' ? ' active' : '')} onClick={() => setTab('insights')}>
+          Insights
+        </button>
       </div>
 
       <div className="content">
         {tab === 'log' && <LogCall rep={rep} setRep={setRep} />}
         {tab === 'dashboard' && <Dashboard />}
         {tab === 'reports' && <Reports />}
+        {tab === 'insights' && <Insights />}
       </div>
     </>
   )

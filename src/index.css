@@ -344,3 +344,212 @@ button {
   font-family: var(--mono);
   font-size: 12px;
 }
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px 16px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 640px;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.modal-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.dm-field {
+  margin-bottom: 14px;
+}
+
+.dm-field label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.dm-field input,
+.dm-field textarea,
+.dm-field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface-2);
+  font-family: var(--sans);
+}
+
+.dm-field textarea {
+  resize: vertical;
+  min-height: 64px;
+}
+
+.dm-field select option {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.o-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.o-pill {
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-dim);
+}
+
+.o-pill.sel {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #1a1206;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.btn-save {
+  flex: 1;
+  padding: 12px;
+  background: var(--accent);
+  color: #1a1206;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-skip {
+  flex: 1;
+  padding: 12px;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.insight-summary {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.reason-bar-row {
+  margin-bottom: 10px;
+}
+
+.reason-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.reason-bar-track {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.reason-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.convo-entry {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--surface-2);
+  margin-bottom: 10px;
+}
+
+.convo-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.convo-company {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+
+.badge-meeting { background: var(--accent); color: #1a1206; }
+.badge-followup { background: rgba(96,165,250,0.2); color: #93c5fd; }
+.badge-email { background: rgba(245,158,11,0.2); color: #fcd34d; }
+.badge-closed { background: rgba(255,255,255,0.08); color: var(--text-dim); }
+
+.convo-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.convo-row-lbl {
+  color: var(--text-dim);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.convo-row-val {
+  color: var(--text);
+  flex: 1;
+}
+
+.convo-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 6px;
+}

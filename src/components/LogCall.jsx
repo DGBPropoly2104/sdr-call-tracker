@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { supabase, REPS, BRANDS } from '../lib/supabase'
+import DMModal from './DMModal'
 
 export default function LogCall({ rep, setRep }) {
   const [pendingMeeting, setPendingMeeting] = useState(false)
   const [toast, setToast] = useState(null)
+  const [dmModal, setDmModal] = useState(null) // { callLogId, defaultOutcome }
 
   useEffect(() => {
     if (!toast) return
@@ -12,22 +14,24 @@ export default function LogCall({ rep, setRep }) {
   }, [toast])
 
   async function log(reached_dm, meeting_booked, brand = null) {
-    const { error } = await supabase.from('call_logs').insert({
-      rep,
-      reached_dm,
-      meeting_booked,
-      brand,
-    })
+    const { data, error } = await supabase
+      .from('call_logs')
+      .insert({ rep, reached_dm, meeting_booked, brand })
+      .select()
+      .single()
+
     if (error) {
       setToast('Error saving — try again')
       console.error(error)
       return
     }
+
     setPendingMeeting(false)
+
     if (meeting_booked) {
-      setToast(`Meeting booked for ${brand} logged`)
+      setDmModal({ callLogId: data.id, defaultOutcome: 'Meeting booked' })
     } else if (reached_dm) {
-      setToast('Reached DM logged')
+      setDmModal({ callLogId: data.id, defaultOutcome: '' })
     } else {
       setToast('Call logged')
     }
@@ -49,7 +53,6 @@ export default function LogCall({ rep, setRep }) {
             Back
           </button>
         </div>
-        {toast && <div className="toast">{toast}</div>}
       </div>
     )
   }
@@ -90,6 +93,22 @@ export default function LogCall({ rep, setRep }) {
       </div>
 
       {toast && <div className="toast">{toast}</div>}
+
+      {dmModal && (
+        <DMModal
+          rep={rep}
+          callLogId={dmModal.callLogId}
+          defaultOutcome={dmModal.defaultOutcome}
+          onClose={() => {
+            setDmModal(null)
+            setToast('Call logged')
+          }}
+          onSaved={() => {
+            setDmModal(null)
+            setToast('DM conversation logged')
+          }}
+        />
+      )}
     </div>
   )
 }
