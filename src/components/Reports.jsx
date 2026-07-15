@@ -51,6 +51,12 @@ export default function Reports() {
     load()
   }, [load])
 
+  async function deleteCall(id) {
+    if (!window.confirm('Delete this call log?')) return
+    const { error } = await supabase.from('call_logs').delete().eq('id', id)
+    if (!error) setRows((prev) => prev.filter((r) => r.id !== id))
+  }
+
   const leaderboard = REPS.map((r) => {
     const repRows = rows.filter((row) => row.rep === r)
     const dials = repRows.length
@@ -121,6 +127,7 @@ export default function Reports() {
                   <th>Rep</th>
                   <th>Outcome</th>
                   <th>Brand</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -140,6 +147,16 @@ export default function Reports() {
                       <td>{r.rep}</td>
                       <td>{outcome}</td>
                       <td>{r.brand || '—'}</td>
+                      <td>
+                        <button
+                          className="delete-btn"
+                          onClick={() => deleteCall(r.id)}
+                          aria-label="Delete call"
+                          title="Delete call"
+                        >
+                          ✕
+                        </button>
+                      </td>
                     </tr>
                   )
                 })}
