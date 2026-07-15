@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase, REPS } from '../lib/supabase'
 
-const TARGET = 25
-
 function badgeClass(o) {
   if (o === 'Meeting booked') return 'badge badge-meeting'
   if (o === 'Follow-up call') return 'badge badge-followup'
@@ -67,16 +65,17 @@ export default function Insights() {
       </div>
 
       <div className="card">
-        <div className="label">DATASET PROGRESS</div>
+        <div className="label">DATASET</div>
         <div className="insight-summary">
-          {loading ? '—' : `${n} / ${TARGET} DM conversations logged`}
+          {loading ? '—' : `${n} DM conversation${n === 1 ? '' : 's'} logged`}
         </div>
-        <div className="reason-bar-track" style={{ marginTop: 6 }}>
-          <div
-            className="reason-bar-fill"
-            style={{ width: `${Math.min(Math.round((n / TARGET) * 100), 100)}%` }}
-          />
-        </div>
+        {!loading && n > 0 && (
+          <p style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 10, lineHeight: 1.5 }}>
+            Check which frustrations repeat most and which objections are masking buying
+            signals — that's where to refine the script.
+          </p>
+        )}
+      </div>
         {n >= TARGET && (
           <p style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 10, lineHeight: 1.5 }}>
             Enough data to spot real patterns now. Check which frustrations repeat most and which
