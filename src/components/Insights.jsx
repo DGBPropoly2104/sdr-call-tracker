@@ -76,13 +76,6 @@ export default function Insights() {
           </p>
         )}
       </div>
-        {n >= TARGET && (
-          <p style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 10, lineHeight: 1.5 }}>
-            Enough data to spot real patterns now. Check which frustrations repeat most and which
-            objections are masking buying signals — that's where to refine the script.
-          </p>
-        )}
-      </div>
 
       <div className="card">
         <div className="label">WHY THEY HAVEN'T CHANGED</div>
@@ -97,76 +90,3 @@ export default function Insights() {
               </div>
               <div className="reason-bar-track">
                 <div
-                  className="reason-bar-fill"
-                  style={{ width: `${Math.round((count / n) * 100)}%` }}
-                />
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      <div className="card">
-        <div className="label">CURRENT SYSTEMS MENTIONED</div>
-        {systemList.length === 0 ? (
-          <div className="empty">No systems logged yet.</div>
-        ) : (
-          systemList.map(([sys, count]) => (
-            <div className="leaderboard-row" key={sys}>
-              <span>{sys}</span>
-              <span className="leaderboard-stats">{count} mentions</span>
-            </div>
-          ))
-        )}
-      </div>
-
-      <div className="card">
-        <div className="label">CONVERSATION LOG ({n})</div>
-        {loading ? (
-          <div className="empty">Loading…</div>
-        ) : rows.length === 0 ? (
-          <div className="empty">No DM conversations logged yet.</div>
-        ) : (
-          rows.map((r) => {
-            const d = new Date(r.ts)
-            const t =
-              d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) +
-              ' · ' +
-              d.toLocaleDateString([], { day: 'numeric', month: 'short' })
-            return (
-              <div className="convo-entry" key={r.id}>
-                <div className="convo-entry-header">
-                  <span className="convo-company">
-                    {r.agent_company || 'Unknown'} <span style={{ color: 'var(--text-dim)', fontWeight: 400 }}>· {r.rep}</span>
-                  </span>
-                  {r.outcome && <span className={badgeClass(r.outcome)}>{r.outcome}</span>}
-                </div>
-                {r.current_system && (
-                  <div className="convo-row">
-                    <span className="convo-row-lbl">Current system</span>
-                    <span className="convo-row-val">{r.current_system}</span>
-                  </div>
-                )}
-                {r.frustration && (
-                  <div className="convo-row">
-                    <span className="convo-row-lbl">Frustration</span>
-                    <span className="convo-row-val" style={{ fontStyle: 'italic' }}>
-                      "{r.frustration}"
-                    </span>
-                  </div>
-                )}
-                {r.why_not_changed && (
-                  <div className="convo-row">
-                    <span className="convo-row-lbl">Why not changed</span>
-                    <span className="convo-row-val">{r.why_not_changed}</span>
-                  </div>
-                )}
-                <div className="convo-meta">{t}</div>
-              </div>
-            )
-          })
-        )}
-      </div>
-    </div>
-  )
-}
